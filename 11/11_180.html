@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+	<title>Color Clock</title>
+	<style type="text/css">
+	body {		
+		text-shadow: rgba(0, 0, 0, 0.498039) 1px 1px 2px;
+		position: relative;
+		top: 0;
+		left: 0;
+	}
+	p {
+		text-align: center;
+		text-shadow: -1px -1px #787878;
+		text-transform: uppercase;
+		font-family: Monaco;
+	}
+	#time {
+		font-size: 35px;
+	}
+	#clock {
+		font-size: 65px;
+	}
+	#color {
+		font-size: 35px;
+	}
+	.parent {
+		position: relative;
+		top: 0;
+		left: 0;
+		margin: 0 auto;
+		width: 500px;
+		font-size: 65px;
+	}
+	#colorId{
+		margin: 0;
+	}
+	.shadow {
+		position: absolute;
+		top: 0;
+		left: 0;
+		color: rgba(255, 255, 255, 0.4);
+		opacity: 0.1;
+		z-index: 1;
+		font-size: 75px;
+		margin: 0 auto;
+		width: 500px;
+		text-align: center;
+		text-shadow: rgba(0, 0, 0, 0.498039) 1px 1px 2px;
+	}	
+	</style>
+	<script src="jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+	var unit = (255 * 255 * 255) / (24 * 60 * 60);
+
+	var updateThings = function(){
+		var today = new Date();
+		var h = today.getHours();
+		var m = today.getMinutes();
+		var s = today.getSeconds();
+
+		var currentColor = Math.floor(((h * 60 * 60) + (m * 60) + s ) * unit);
+		var colorStr = currentColor.toString(16);
+		while (colorStr.length < 6){
+			colorStr = "0" + colorStr;
+		}	
+		var colorCode = "#" + colorStr;
+		
+		$('#clock').html(today.toLocaleTimeString());
+		$('body').css("background-color", colorCode);		
+		$('#colorId').html(colorStr);
+	}
+
+	$(document).ready(function(){
+		updateThings();
+		setInterval(updateThings, 1000);
+	});
+	</script>
+</head>
+<body>
+	<p id="time">The current time is</p> 
+	<p id="clock"></p> 
+	<p id="color">The color is</p>
+	<div class="parent">
+		<p id="colorId"></p>
+		<div id="shadow1" class="shadow">123456</div>
+		<div id="shadow2" class="shadow">234567</div>
+		<div id="shadow3" class="shadow">345678</div>
+		<div id="shadow4" class="shadow">456789</div>
+		<div id="shadow5" class="shadow">567890</div>
+		<div id="shadow6" class="shadow">678901</div>
+	</div>	
+</body>
+</html>

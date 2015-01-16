@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bouncing Ball</title>
+	</head>
+	<style type="text/css">
+	h2, p {
+		margin-left: 200px;
+		color: black;
+		font-weight: bold;
+		font-family: Geneva;
+	}
+	h2 {
+		font-size: 30px;
+	}
+	.ball {
+		background-color: blue;
+		height: 100px;
+		width: 100px;
+		border-radius: 50px;
+		display: inline-block;
+		position: absolute;
+		top: 0;
+		left: 600px;
+		-webkit-animation-name: bounce;
+		-webkit-animation-duration: 5s;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-direction: alternate;
+		-webkit-animation-timing-function: ease-in;    	
+	}
+	@-webkit-keyframes bounce {
+		from {top: 0} 
+		to {top: 580px;}
+	}
+	.message {
+		font-family: Courier;
+		font-size: 30px;
+		position: absolute;
+		top: 300px;
+		left: 600px;
+		color: pink;
+		font-weight: bold;
+	}	
+	</style>
+	<script src="jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("body").disableSelection();
+		var messageBox = $('<div class="message"></div>');
+		messageBox.hide();
+		$(document.body).append(messageBox);
+		messages = ["You won!", "You rock!", "Wow!", "That was crazy!", "Incredible!", "Good job!"]
+		i = 5;		
+		$(".ball").on("click", function(){
+			$(".ball").hide();
+			messageBox.html(messages[i]);
+			messageBox.show();
+			i --;
+			var newAnimation = "bounce " + i + "s ease-in infinite alternate";	
+			$(".ball").css("webkit-animation", newAnimation);
+			setTimeout(function(){
+				messageBox.hide();
+				$(".ball").show();
+			},1000);
+		});
+	});
+	$.fn.disableSelection = function() {
+		return this
+	    	.attr('unselectable', 'on')
+	    	.css('user-select', 'none')
+	    	.on('selectstart', false);
+	};
+	</script>
+	<body>
+		<h2>Catch the<br> Bouncing Ball</h2></br>
+		<p>Click the ball<br> to advance to the<br> next level.</p>
+		<div class="ball"></div>
+
+	</body>
+</html>

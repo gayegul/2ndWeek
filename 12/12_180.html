@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+	<title>Dice Roller</title>
+	<style type="text/css">
+	body {
+		background-color: #FFF5F5;
+	}
+	p {
+		font-size: 30px;
+		font-family: Times New Roman;
+		color: black;
+		text-align: center;
+		text-decoration: bold;
+	}
+	button {
+		width: 200px;
+		height: 75px;
+		border-style: 1px solid green;
+		outline: none;
+		position: absolute;
+		top: 325px;
+		left: 555px;
+		border-radius: 10px;
+		font-size: 20px;
+		background: -webkit-linear-gradient(#99FFCC, #E0C2FF);
+	}
+	#dice1 {
+		width: 150px;
+		height: 150px;
+		background-color: #6699FF;
+		border-radius: 7px;
+		position: absolute;
+		top: 150px;
+		left: 400px;
+	}
+	#dice2 {
+		width: 150px;
+		height: 150px;
+		background-color: #6699FF;
+		border-radius: 7px;
+		position: absolute;
+		top: 150px;
+		left: 750px;
+	}	
+	.dot1, .dot2, .dot3, .dot4, .dot5, 
+	.face6 .dot6, .face6 .dot7 {
+		position: absolute;
+		display: block;
+		border-radius: 50%;
+		width:20px;
+		height: 20px;
+		background: white;
+	}
+	.dot6, .dot7 {
+		position: absolute;
+		display: none;
+		border-radius: 50%;
+		width:20px;
+		height: 20px;
+		background: white;
+	}
+	.dot1 {
+		top: 110px;
+		left: 20px;
+	}
+	.dot2 {
+		top: 20px;
+		left: 110px;
+	}
+	.dot3 {
+		top: 65px;
+		left: 65px;
+	}
+	.dot4 {
+		top: 110px;
+		left: 110px;
+	}
+	.dot5 {
+		top: 20px;
+		left: 20px;
+	}
+	.dot6 {
+		top: 65px;
+		left: 20px;
+	}
+	.dot7 {
+		top: 65px;
+		left: 110px;
+	}
+	.face1 .dot1, 
+	.face1 .dot2, 
+	.face2 .dot3, .face4 .dot3, .face6 .dot3,
+	.face1 .dot4, .face2 .dot4, .face3 .dot4, 
+	.face1 .dot5, .face2 .dot5, .face3 .dot5
+	{
+		display: none;
+	}	
+	.shake {
+		-webkit-animation: shake 0.3s 5 linear;
+	}
+	@-webkit-keyframes shake {
+		8%, 41% { -webkit-transform: translate(-10px, 0); }
+		25%, 58% { -webkit-transform: translate(10px, 0); }
+		75% { -webkit-transform: translate(-5px, 0); }
+		92% { -webkit-transform: translate(5px, 0); }
+		0%, 100% { -webkit-transform: translate(0, 0); }
+	}
+	#shake {
+		display: none;
+		font-size: 40px;
+	}
+	</style>
+	<script src="jquery-1.11.0.js"></script>
+	<script type="text/javascript">
+		var shake = function() {
+			$('#results').hide();
+			$("#shake").addClass("shake").show();
+			setTimeout(roll, 1500);								
+		}
+		var roll = function() {
+			$("#shake").removeClass().hide();
+			var result1 = Math.floor(Math.random() * 5) + 1;
+			$("#dice1").removeClass().addClass("face" + result1);
+			var result2 = Math.floor(Math.random() * 5) + 1;
+			$("#dice2").removeClass().addClass("face" + result2);
+			$('#results').html(result1 + result2).show();
+		}
+	</script>
+</head>
+<body>
+	<button onclick="shake()">Shake 'em'!</button>
+	<div id="dice1" class="face1">
+		<div class="dot1"></div>
+		<div class="dot2"></div>
+		<div class="dot3"></div>
+		<div class="dot4"></div>
+		<div class="dot5"></div>
+		<div class="dot6"></div>
+		<div class="dot7"></div>
+	</div>
+	<div id="dice2" class="face1">
+		<div class="dot1"></div>
+		<div class="dot2"></div>
+		<div class="dot3"></div>
+		<div class="dot4"></div>
+		<div class="dot5"></div>
+		<div class="dot6"></div>
+		<div class="dot7"></div>
+	</div>
+	<p id="results">Hey you! Give us roll!</p>
+	<p id="shake">shake, shake, shake..</p>
+</body>
+</html>
